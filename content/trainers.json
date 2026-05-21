@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Andrius Mikėnas",
+    "role": "Pagrindinis treneris",
+    "image": "/images/andrius-mikenas.jpg",
+    "description": "Ilgametę patirtį turintis dziudo treneris, daugelio Lietuvos ir tarptautinių varžybų nugalėtojų rengėjas."
+  },
+  {
+    "name": "Jonas Tilvikas",
+    "role": "Treneris",
+    "image": "/images/jonas-tilvikas.jpg",
+    "description": "Specializuojasi jaunųjų sportininkų ugdyme, ypatingą dėmesį skiria technikos tobulinimui ir disciplinai."
+  },
+  {
+    "name": "Vidas Pocius",
+    "role": "Treneris",
+    "image": "/images/placeholder.svg",
+    "description": "Patyręs dziudo specialistas, ugdantis tiek vaikus, tiek suaugusiuosius, skatinantis kovos dvasios formavimą."
+  }
+]

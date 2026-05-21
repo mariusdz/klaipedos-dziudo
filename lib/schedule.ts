@@ -1,3 +1,5 @@
+import scheduleData from '@/content/schedule.json'
+
 export interface TrainingSession {
   day: string
   time: string
@@ -5,65 +7,4 @@ export interface TrainingSession {
   location: string
 }
 
-export const schedule: TrainingSession[] = [
-  {
-    day: 'Pirmadienis',
-    time: '15:30 – 16:30',
-    group: 'Jaunučiai',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Pirmadienis',
-    time: '16:30 – 19:00',
-    group: 'Jauniai ir suaugę',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Antradienis',
-    time: '15:30 – 16:30',
-    group: 'Jaunučiai',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Antradienis',
-    time: '16:30 – 19:00',
-    group: 'Jauniai ir suaugę',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Trečiadienis',
-    time: '15:30 – 16:30',
-    group: 'Jaunučiai',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Trečiadienis',
-    time: '16:30 – 19:00',
-    group: 'Jauniai ir suaugę',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Ketvirtadienis',
-    time: '15:30 – 16:30',
-    group: 'Jaunučiai',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Ketvirtadienis',
-    time: '16:30 – 19:00',
-    group: 'Jauniai ir suaugę',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Penktadienis',
-    time: '15:30 – 16:30',
-    group: 'Jaunučiai',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-  {
-    day: 'Penktadienis',
-    time: '16:30 – 19:00',
-    group: 'Jauniai ir suaugę',
-    location: 'Klaipėdos Viesulo sporto centras',
-  },
-]
+export const schedule: TrainingSession[] = scheduleData

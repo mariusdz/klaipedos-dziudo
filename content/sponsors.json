@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Gridin's Group",
+    "logo": "/images/gridins-logo.png",
+    "url": "https://gridins.com/lt"
+  },
+  {
+    "name": "Klaipėdos miesto savivaldybė",
+    "logo": "/images/klaipeda-logo.svg",
+    "url": "https://www.klaipeda.lt/lt"
+  },
+  {
+    "name": "Lietuvos dziudo federacija",
+    "logo": "/images/judo-lt-logo.png",
+    "url": "https://www.judo.lt/"
+  },
+  {
+    "name": "Klaipėdos Šamas",
+    "logo": "/images/samas-logo.png",
+    "url": "https://rekvizitai.vz.lt/imone/klaipedos_samas/"
+  },
+  {
+    "name": "Klaipėdos Viesulo Sporto Centras",
+    "logo": "/images/viesulo-logo.svg",
+    "url": "https://viesulocentras.lt/"
+  }
+]

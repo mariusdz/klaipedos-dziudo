@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
-import { CookieBanner } from '@/components/sections/CookieBanner'
+import { ClientLayout } from '@/components/layout/ClientLayout'
 import { sportsOrganizationSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
@@ -50,13 +48,8 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-white text-dojo-black antialiased">
-        <Header />
-        <div className="flex-1 pt-[72px] md:pt-[80px]">
-          {children}
-        </div>
-        <Footer />
-        <CookieBanner />
+      <body>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   )

@@ -1,62 +1,9 @@
+import athletesData from '@/content/athletes.json'
+
 export interface Athlete {
   name: string
   category: string
   achievements: string[]
-  image?: string
 }
 
-export const athletes: Athlete[] = [
-  {
-    name: 'Mantas Kovalenka',
-    category: 'Jaunučiai (-55 kg)',
-    achievements: [
-      '2024 m. Lietuvos jaunučių čempionatas – 1 vieta',
-      '2024 m. Klaipėdos miesto čempionatas – 1 vieta',
-      '2023 m. Lietuvos jaunučių čempionatas – 2 vieta',
-    ],
-  },
-  {
-    name: 'Dominykas Petraitis',
-    category: 'Jauniai (-66 kg)',
-    achievements: [
-      '2024 m. Europos taurės etapas – 3 vieta',
-      '2024 m. Lietuvos jaunių čempionatas – 1 vieta',
-      '2023 m. Baltijos šalių čempionatas – 2 vieta',
-    ],
-  },
-  {
-    name: 'Gabija Stankevičiūtė',
-    category: 'Jaunimo merginos (-57 kg)',
-    achievements: [
-      '2024 m. Lietuvos jaunimo čempionatas – 1 vieta',
-      '2024 m. Klaipėdos miesto čempionatas – 1 vieta',
-      '2023 m. Lietuvos jaunių čempionatas – 3 vieta',
-    ],
-  },
-  {
-    name: 'Nojus Baltrūnas',
-    category: 'Vaikai (-40 kg)',
-    achievements: [
-      '2024 m. Lietuvos vaikų čempionatas – 2 vieta',
-      '2024 m. Klaipėdos miesto čempionatas – 1 vieta',
-      '2024 m. Tarptautinis turnyras Klaipėdoje – 1 vieta',
-    ],
-  },
-  {
-    name: 'Ema Žukauskaitė',
-    category: 'Jaunučiai merginos (-48 kg)',
-    achievements: [
-      '2024 m. Lietuvos jaunučių čempionatas – 2 vieta',
-      '2023 m. Lietuvos vaikų čempionatas – 1 vieta',
-    ],
-  },
-  {
-    name: 'Lukas Girėnas',
-    category: 'Suaugę vyrai (-73 kg)',
-    achievements: [
-      '2024 m. Lietuvos suaugusiųjų čempionatas – 3 vieta',
-      '2023 m. Lietuvos taurė – 2 vieta',
-      '2023 m. Lietuvos suaugusiųjų čempionatas – 5 vieta',
-    ],
-  },
-]
+export const athletes: Athlete[] = athletesData
