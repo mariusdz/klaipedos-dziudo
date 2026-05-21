@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --color-dojo-blue: #03386C;
+  --color-dojo-blue-light: #0558A8;
+  --color-dojo-blue-dark: #02284D;
+  --color-dojo-black: #1a1a1a;
+  --color-dojo-white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter);
+  color: var(--color-dojo-black);
+  background-color: var(--color-dojo-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Marquee animation for sponsors */
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 35s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Focus visible styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-dojo-blue);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  .page-section {
+    @apply w-full py-16 md:py-24;
+  }
+
+  .container-default {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .heading-display {
+    @apply text-display font-bold tracking-tight text-dojo-blue;
+  }
+
+  .heading-1 {
+    @apply text-heading-1 font-bold tracking-tight text-dojo-blue;
+  }
+
+  .heading-2 {
+    @apply text-heading-2 font-semibold text-dojo-black;
+  }
+
+  .heading-3 {
+    @apply text-heading-3 font-semibold text-dojo-black;
+  }
+
+  .prose-body {
+    @apply text-body text-dojo-gray-700 leading-relaxed;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-dojo-blue rounded-xl transition-all duration-300 hover:bg-dojo-blue-light hover:shadow-elevated focus-visible:ring-2 focus-visible:ring-dojo-blue focus-visible:ring-offset-2 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-dojo-blue bg-white border-2 border-dojo-blue rounded-xl transition-all duration-300 hover:bg-dojo-blue hover:text-white focus-visible:ring-2 focus-visible:ring-dojo-blue focus-visible:ring-offset-2 active:scale-[0.98];
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-card transition-all duration-300 hover:shadow-card-hover;
+  }
+
+  .card-bordered {
+    @apply card border border-dojo-gray-200;
+  }
+}

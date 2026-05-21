@@ -1,0 +1,19 @@
+{
+  "short_name": "Dziudo Klaipėda",
+  "name": "Klaipėdos Dziudo Klubas",
+  "description": "Profesionalus dziudo klubas Klaipėdoje. Treniruotės vaikams, jaunimui ir suaugusiems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#03386C",
+  "theme_color": "#03386C",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/Klaipedos-Dziudo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "lt"
+}
