@@ -6,6 +6,7 @@ import { Phone, Mail, MapPin, Clock, Globe, MessageCircle } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Card } from '@/components/ui/Card'
 import { ContactForm } from '@/components/sections/ContactForm'
+import { assetPath } from '@/lib/paths'
 import { TrainingSchedule } from '@/components/sections/TrainingSchedule'
 
 const contactInfo = [
@@ -68,7 +69,7 @@ export default function ContactPage() {
                 <div className="flex flex-col items-center text-center mb-8">
                   <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-md mb-6">
                     <Image
-                      src="/images/andrius-mikenas.jpg"
+                      src={assetPath('/images/andrius-mikenas.jpg')}
                       alt="Andrius Mikėnas"
                       fill
                       className="object-cover"

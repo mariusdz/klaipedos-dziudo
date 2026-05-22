@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Users, Trophy, Calendar, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { assetPath } from '@/lib/paths'
+import { hero } from '@/lib/data'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -41,13 +43,37 @@ export default function HomePage() {
       <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 -z-10">
+          {/* Fallback image for when video doesn't load */}
+          <Image
+            src={hero.fallbackImage}
+            alt="Dziudo treniruotė"
+            fill
+            className="object-cover"
+            priority
+          />
           <div className="absolute inset-0 w-full h-full">
-            <iframe
-              className="absolute top-1/2 left-1/2 w-[177.78vh] h-[100vh] -translate-x-1/2 -translate-y-1/2"
-              src="https://www.youtube.com/embed/JlnzG3_MjnU?autoplay=1&mute=1&loop=1&playlist=JlnzG3_MjnU&controls=0&showinfo=0&modestbranding=1"
-              title="Dziudo treniruotės"
-              allow="autoplay; fullscreen"
-            />
+            {hero.videoFile ? (
+              <video
+                className="absolute top-1/2 left-1/2 w-[177.78vh] h-[100vh] -translate-x-1/2 -translate-y-1/2 object-cover"
+                src={hero.videoFile}
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster={hero.fallbackImage}
+              />
+            ) : (
+              <iframe
+                className="absolute top-1/2 left-1/2 w-[177.78vh] h-[100vh] -translate-x-1/2 -translate-y-1/2"
+                src={hero.videoUrl}
+                title="Dziudo treniruotės"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                loading="eager"
+              />
+            )}
           </div>
           <div className="absolute inset-0 bg-dojo-blue/60" />
         </div>
@@ -67,14 +93,14 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               className="text-display font-bold mb-6"
             >
-              Sveiki atvykę į Klaipėkos dziudo puslapį!
+              {hero.title}
             </motion.h1>
             <motion.p
               variants={fadeInUp}
               transition={{ duration: 0.6 }}
               className="text-body-lg md:text-xl text-white/90 mb-10 max-w-xl mx-auto"
             >
-              Mūsų klube vyksta treniruotės visoms amžiaus grupėms Klaipėdoje.
+              {hero.subtitle}
             </motion.p>
             <motion.div
               variants={fadeInUp}
@@ -177,7 +203,7 @@ export default function HomePage() {
               className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated"
             >
               <Image
-                src="/images/dojo.png"
+                src={assetPath('/images/dojo.png')}
                 alt="Dziudo treniruotė"
                 fill
                 className="object-cover"

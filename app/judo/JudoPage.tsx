@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { SectionHeader } from '@/components/ui/SectionHeader'
+import { assetPath } from '@/lib/paths'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -96,7 +97,7 @@ export default function JudoPage() {
               className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated"
             >
               <Image
-                src="/images/jigoro-kano.png"
+                src={assetPath('/images/jigoro-kano.png')}
                 alt="Džigoro Kano – dziudo įkūrėjas"
                 fill
                 className="object-cover"
@@ -113,7 +114,7 @@ export default function JudoPage() {
               className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated order-2 md:order-1"
             >
               <Image
-                src="/images/dojo.png"
+                src={assetPath('/images/dojo.png')}
                 alt="Dojo Japonijoje"
                 fill
                 className="object-cover"
@@ -237,7 +238,7 @@ export default function JudoPage() {
               className="relative aspect-square rounded-2xl overflow-hidden shadow-elevated"
             >
               <Image
-                src="/kodokan.jpeg"
+                src={assetPath('/kodokan.jpeg')}
                 alt="Kodokan dziudo mokykla"
                 fill
                 className="object-cover"

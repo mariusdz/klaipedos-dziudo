@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { navLinks } from '@/lib/data'
+import { assetPath } from '@/lib/paths'
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -57,7 +58,7 @@ export function Header() {
             <Link href="/" className="flex items-center gap-3 shrink-0 group">
               <div className="relative w-12 h-12 md:w-14 md:h-14 transition-transform duration-300 group-hover:scale-105">
                 <Image
-                  src="/images/Klaipedos-Dziudo.svg"
+                  src={assetPath('/images/Klaipedos-Dziudo.svg')}
                   alt="Klaipėdos Dziudo"
                   fill
                   className="object-contain"

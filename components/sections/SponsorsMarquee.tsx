@@ -34,7 +34,8 @@ export function SponsorsMarquee() {
                   alt={sponsor.name}
                   width={120}
                   height={56}
-                  className="object-contain max-h-12 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                  className="object-contain max-h-12 w-auto grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                  style={{ width: 'auto' }}
                 />
               </div>
               <span className="text-xs text-dojo-gray-400 mt-2 group-hover:text-white transition-colors whitespace-nowrap">

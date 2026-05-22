@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Copy, Check, ExternalLink, Heart } from 'lucide-react'
 import { useState } from 'react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
+import { assetPath } from '@/lib/paths'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 
@@ -74,7 +75,7 @@ export default function ParamaPage() {
                   <div className="relative h-48 md:h-auto bg-dojo-gray-50 flex items-center justify-center p-8">
                     <div className="relative w-full h-full max-w-[200px]">
                       <Image
-                        src="/images/Klaipedos-Dziudo.svg"
+                        src={assetPath('/images/Klaipedos-Dziudo.svg')}
                         alt="Klaipėdos Dziudo Klubas"
                         fill
                         className="object-contain"

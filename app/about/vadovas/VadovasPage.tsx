@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Phone, Mail, Quote } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
+import { assetPath } from '@/lib/paths'
 
 export default function VadovasPage() {
   return (
@@ -37,7 +38,7 @@ export default function VadovasPage() {
                   {/* Image Side */}
                   <div className="relative h-80 md:h-auto bg-dojo-gray-100">
                     <Image
-                      src="/images/andrius-mikenas.jpg"
+                      src={assetPath('/images/andrius-mikenas.jpg')}
                       alt="Andrius Mikėnas"
                       fill
                       className="object-cover"

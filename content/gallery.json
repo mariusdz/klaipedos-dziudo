@@ -1,0 +1,32 @@
+[
+  {
+    "src": "/images/andrius-mikenas.jpg",
+    "width": 800,
+    "height": 800,
+    "alt": "Andrius Mikėnas – klubo vadovas"
+  },
+  {
+    "src": "/images/jonas-tilvikas.jpg",
+    "width": 800,
+    "height": 800,
+    "alt": "Jonas Tilvikas – treneris"
+  },
+  {
+    "src": "/images/dojo.png",
+    "width": 1200,
+    "height": 800,
+    "alt": "Dziudo treniruočių salė"
+  },
+  {
+    "src": "/kodokan.jpeg",
+    "width": 1200,
+    "height": 800,
+    "alt": "Kodokan dziudo mokykla Japonijoje"
+  },
+  {
+    "src": "/images/jigoro-kano.png",
+    "width": 1000,
+    "height": 700,
+    "alt": "Džigoro Kano – dziudo įkūrėjas"
+  }
+]

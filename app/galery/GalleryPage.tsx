@@ -6,39 +6,7 @@ import PhotoAlbum from 'react-photo-album'
 import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-
-const photos = [
-  {
-    src: '/images/andrius-mikenas.jpg',
-    width: 800,
-    height: 800,
-    alt: 'Andrius Mikėnas – klubo vadovas',
-  },
-  {
-    src: '/images/jonas-tilvikas.jpg',
-    width: 800,
-    height: 800,
-    alt: 'Jonas Tilvikas – treneris',
-  },
-  {
-    src: '/images/dojo.png',
-    width: 1200,
-    height: 800,
-    alt: 'Dziudo treniruočių salė',
-  },
-  {
-    src: '/kodokan.jpeg',
-    width: 1200,
-    height: 800,
-    alt: 'Kodokan dziudo mokykla Japonijoje',
-  },
-  {
-    src: '/images/jigoro-kano.png',
-    width: 1000,
-    height: 700,
-    alt: 'Džigoro Kano – dziudo įkūrėjas',
-  },
-]
+import { galleryPhotos } from '@/lib/data'
 
 export default function GalleryPage() {
   const [index, setIndex] = useState(-1)
@@ -68,14 +36,20 @@ export default function GalleryPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <PhotoAlbum
-              photos={photos}
-              layout="rows"
-              targetRowHeight={300}
-              spacing={8}
-              padding={0}
-              onClick={({ index: current }) => setIndex(current)}
-            />
+            {galleryPhotos.length > 0 ? (
+              <PhotoAlbum
+                photos={galleryPhotos}
+                layout="rows"
+                targetRowHeight={300}
+                spacing={8}
+                padding={0}
+                onClick={({ index: current }) => setIndex(current)}
+              />
+            ) : (
+              <div className="text-center py-20 text-dojo-gray-500">
+                Galerija tuščia. Pridėkite nuotraukų per admin panelę.
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -83,7 +57,7 @@ export default function GalleryPage() {
       <Lightbox
         open={index >= 0}
         close={() => setIndex(-1)}
-        slides={photos}
+        slides={galleryPhotos}
         index={index}
       />
     </>

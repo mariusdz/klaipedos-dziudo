@@ -13,7 +13,8 @@ import {
   Heart,
   Calendar,
   BookOpen,
-  Award,
+  Image,
+  Home,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -23,8 +24,10 @@ import athletesData from '@/content/athletes.json'
 import pressArticlesData from '@/content/press-articles.json'
 import scheduleData from '@/content/schedule.json'
 import moralCodeData from '@/content/moral-code.json'
+import galleryData from '@/content/gallery.json'
+import heroData from '@/content/hero.json'
 
-type TabKey = 'sponsors' | 'trainers' | 'athletes' | 'press' | 'schedule' | 'moral'
+type TabKey = 'sponsors' | 'trainers' | 'athletes' | 'press' | 'schedule' | 'moral' | 'gallery' | 'hero'
 
 interface TabDef {
   key: TabKey
@@ -39,6 +42,8 @@ const tabs: TabDef[] = [
   { key: 'press', label: 'Spauda', icon: Newspaper },
   { key: 'schedule', label: 'Tvarkaraštis', icon: Calendar },
   { key: 'moral', label: 'Moralės kodeksas', icon: BookOpen },
+  { key: 'gallery', label: 'Galerija', icon: Image },
+  { key: 'hero', label: 'Pradžios puslapis', icon: Home },
 ]
 
 function downloadJson(filename: string, data: unknown) {
@@ -53,9 +58,7 @@ function downloadJson(filename: string, data: unknown) {
   URL.revokeObjectURL(url)
 }
 
-function downloadAll(
-  data: Record<string, unknown>
-) {
+function downloadAll(data: Record<string, unknown>) {
   Object.entries(data).forEach(([name, value]) => {
     downloadJson(`${name}.json`, value)
   })
@@ -70,7 +73,7 @@ function ListEditor({
 }: {
   items: any[]
   onChange: (items: any[]) => void
-  fields: { key: string; label: string; type?: 'text' | 'textarea' | 'array' }[]
+  fields: { key: string; label: string; type?: 'text' | 'textarea' | 'array' | 'number' }[]
   addTemplate: () => any
 }) {
   const updateItem = (index: number, key: string, value: any) => {
@@ -172,6 +175,13 @@ function ListEditor({
                         Pridėti eilutę
                       </button>
                     </div>
+                  ) : field.type === 'number' ? (
+                    <input
+                      type="number"
+                      value={item[field.key] || 0}
+                      onChange={(e) => updateItem(i, field.key, Number(e.target.value))}
+                      className="w-full px-3 py-2 rounded-lg border border-dojo-gray-200 bg-white text-sm text-dojo-gray-900 focus:outline-none focus:ring-2 focus:ring-dojo-blue focus:border-transparent transition-all"
+                    />
                   ) : (
                     <input
                       type="text"
@@ -206,6 +216,50 @@ function ListEditor({
   )
 }
 
+/* ─── Single object editor (for hero) ─── */
+function ObjectEditor({
+  data,
+  onChange,
+  fields,
+}: {
+  data: Record<string, any>
+  onChange: (data: Record<string, any>) => void
+  fields: { key: string; label: string; type?: 'text' | 'textarea' }[]
+}) {
+  const updateField = (key: string, value: any) => {
+    onChange({ ...data, [key]: value })
+  }
+
+  return (
+    <div className="bg-white rounded-xl border border-dojo-gray-200 p-4 md:p-5 shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {fields.map((field) => (
+          <div key={field.key} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+            <label className="block text-xs font-semibold text-dojo-gray-500 uppercase tracking-wide mb-1">
+              {field.label}
+            </label>
+            {field.type === 'textarea' ? (
+              <textarea
+                value={data[field.key] || ''}
+                onChange={(e) => updateField(field.key, e.target.value)}
+                rows={3}
+                className="w-full px-3 py-2 rounded-lg border border-dojo-gray-200 bg-white text-sm text-dojo-gray-900 focus:outline-none focus:ring-2 focus:ring-dojo-blue focus:border-transparent transition-all resize-y"
+              />
+            ) : (
+              <input
+                type="text"
+                value={data[field.key] || ''}
+                onChange={(e) => updateField(field.key, e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-dojo-gray-200 bg-white text-sm text-dojo-gray-900 focus:outline-none focus:ring-2 focus:ring-dojo-blue focus:border-transparent transition-all"
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 /* ─── Main panel ─── */
 export function AdminPanel() {
   const [activeTab, setActiveTab] = useState<TabKey>('sponsors')
@@ -216,6 +270,8 @@ export function AdminPanel() {
   const [press, setPress] = useState(pressArticlesData)
   const [schedule, setSchedule] = useState(scheduleData)
   const [moral, setMoral] = useState(moralCodeData)
+  const [gallery, setGallery] = useState(galleryData)
+  const [hero, setHero] = useState(heroData)
 
   const handleDownloadAll = useCallback(() => {
     downloadAll({
@@ -225,8 +281,10 @@ export function AdminPanel() {
       'press-articles': press,
       schedule,
       'moral-code': moral,
+      gallery,
+      hero,
     })
-  }, [sponsors, trainers, athletes, press, schedule, moral])
+  }, [sponsors, trainers, athletes, press, schedule, moral, gallery, hero])
 
   const renderEditor = () => {
     switch (activeTab) {
@@ -309,6 +367,34 @@ export function AdminPanel() {
             addTemplate={() => ({ title: '', subtitle: '', description: '' })}
           />
         )
+      case 'gallery':
+        return (
+          <ListEditor
+            items={gallery}
+            onChange={setGallery}
+            fields={[
+              { key: 'src', label: 'Nuotraukos kelias (pvz. /images/photo.jpg)' },
+              { key: 'width', label: 'Plotis (px)', type: 'number' },
+              { key: 'height', label: 'Aukštis (px)', type: 'number' },
+              { key: 'alt', label: 'Alternatyvus tekstas' },
+            ]}
+            addTemplate={() => ({ src: '/images/placeholder.svg', width: 800, height: 600, alt: '' })}
+          />
+        )
+      case 'hero':
+        return (
+          <ObjectEditor
+            data={hero}
+            onChange={(data) => setHero(data as typeof hero)}
+            fields={[
+              { key: 'videoFile', label: 'Vietinio video kelias (pvz. /videos/hero.mp4) – turi prioritetą' },
+              { key: 'videoUrl', label: 'YouTube embed URL (naudojama jei nėra vietinio video)' },
+              { key: 'fallbackImage', label: 'Atsarginės nuotraukos kelias' },
+              { key: 'title', label: 'Pavadinimas' },
+              { key: 'subtitle', label: 'Paantraštė', type: 'textarea' },
+            ]}
+          />
+        )
     }
   }
 
@@ -373,6 +459,8 @@ export function AdminPanel() {
                 press,
                 schedule,
                 moral,
+                gallery,
+                hero,
               }
               downloadJson(`${tab.key}.json`, map[activeTab])
             }}

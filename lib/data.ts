@@ -2,6 +2,9 @@ import sponsorsData from '@/content/sponsors.json'
 import trainersData from '@/content/trainers.json'
 import pressArticlesData from '@/content/press-articles.json'
 import moralCodeData from '@/content/moral-code.json'
+import galleryData from '@/content/gallery.json'
+import heroData from '@/content/hero.json'
+import { assetPath } from './paths'
 
 export interface Sponsor {
   name: string
@@ -27,10 +30,30 @@ export interface MoralCode {
   description: string
 }
 
-export const sponsors: Sponsor[] = sponsorsData
-export const trainers: Trainer[] = trainersData
+export interface GalleryPhoto {
+  src: string
+  width: number
+  height: number
+  alt: string
+}
+
+export interface HeroConfig {
+  videoUrl: string
+  videoFile: string
+  fallbackImage: string
+  title: string
+  subtitle: string
+}
+
+export const sponsors: Sponsor[] = sponsorsData.map((s) => ({ ...s, logo: assetPath(s.logo) }))
+export const trainers: Trainer[] = trainersData.map((t) => ({ ...t, image: assetPath(t.image) }))
 export const pressArticles: PressArticle[] = pressArticlesData
 export const moralCode: MoralCode[] = moralCodeData
+export const galleryPhotos: GalleryPhoto[] = galleryData.map((p) => ({ ...p, src: assetPath(p.src) }))
+export const hero: HeroConfig = {
+  ...heroData,
+  fallbackImage: assetPath(heroData.fallbackImage),
+}
 
 export const navLinks = [
   { label: 'Dziudo', href: '/judo' },

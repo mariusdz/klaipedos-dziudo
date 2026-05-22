@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react'
 import { SponsorsMarquee } from '@/components/sections/SponsorsMarquee'
+import { assetPath } from '@/lib/paths'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -23,7 +24,7 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 mb-4">
               <div className="relative w-10 h-10">
                 <Image
-                  src="/images/Klaipedos-Dziudo.svg"
+                  src={assetPath('/images/Klaipedos-Dziudo.svg')}
                   alt="Klaipėdos Dziudo"
                   fill
                   className="object-contain"
