@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef, useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 
 interface VideoBackgroundProps {
@@ -16,33 +15,6 @@ export function VideoBackground({
   fallbackImage,
   title = 'Background video',
 }: VideoBackgroundProps) {
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-  const [iframeReady, setIframeReady] = useState(false)
-
-  // Attempt to trigger YouTube autoplay via postMessage
-  const tryAutoplay = useCallback(() => {
-    if (!iframeRef.current) return
-    try {
-      iframeRef.current.contentWindow?.postMessage(
-        JSON.stringify({ event: 'command', func: 'playVideo', args: '' }),
-        '*'
-      )
-    } catch {
-      // Ignore cross-origin errors
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!iframeReady || !videoUrl) return
-
-    // YouTube needs time to initialize before accepting commands
-    const timers = [800, 1500, 2500, 4000].map((delay) =>
-      setTimeout(tryAutoplay, delay)
-    )
-
-    return () => timers.forEach(clearTimeout)
-  }, [iframeReady, videoUrl, tryAutoplay])
-
   // Local video file path — most reliable for autoplay
   if (videoFile) {
     return (
@@ -67,12 +39,22 @@ export function VideoBackground({
     )
   }
 
-  // YouTube iframe fallback
+  // YouTube iframe fallback — browsers may block cross-origin autoplay.
+  // Privacy-enhanced nocookie domain sometimes works better.
   if (videoUrl) {
-    // Add enablejsapi so we can send play commands
-    const embedUrl = videoUrl.includes('enablejsapi')
-      ? videoUrl
-      : `${videoUrl}${videoUrl.includes('?') ? '&' : '?'}enablejsapi=1`
+    const url = new URL(videoUrl)
+    // Swap to privacy-enhanced domain
+    url.hostname = 'www.youtube-nocookie.com'
+    url.searchParams.set('autoplay', '1')
+    url.searchParams.set('mute', '1')
+    url.searchParams.set('loop', '1')
+    url.searchParams.set('playlist', 'JlnzG3_MjnU')
+    url.searchParams.set('controls', '0')
+    url.searchParams.set('modestbranding', '1')
+    url.searchParams.set('playsinline', '1')
+    url.searchParams.set('rel', '0')
+    url.searchParams.set('showinfo', '0')
+    url.searchParams.set('iv_load_policy', '3')
 
     return (
       <div className="absolute inset-0 overflow-hidden">
@@ -86,8 +68,7 @@ export function VideoBackground({
         />
         {/* YouTube iframe sized to cover viewport while maintaining 16:9 */}
         <iframe
-          ref={iframeRef}
-          src={embedUrl}
+          src={url.toString()}
           title={title}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 aspect-video pointer-events-none"
           style={{
@@ -96,12 +77,8 @@ export function VideoBackground({
             minWidth: '100vw',
             minHeight: '56.25vw',
           }}
-          frameBorder={0}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           referrerPolicy="strict-origin-when-cross-origin"
-          onLoad={() => setIframeReady(true)}
-          tabIndex={-1}
-          aria-hidden="true"
         />
       </div>
     )
