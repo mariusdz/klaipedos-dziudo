@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Users, Trophy, Calendar, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { VideoBackground } from '@/components/ui/VideoBackground'
 import { assetPath } from '@/lib/paths'
 import { hero } from '@/lib/data'
 
@@ -43,38 +44,12 @@ export default function HomePage() {
       <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center overflow-hidden">
         {/* Background Video */}
         <div className="absolute inset-0 -z-10">
-          {/* Fallback image for when video doesn't load */}
-          <Image
-            src={hero.fallbackImage}
-            alt="Dziudo treniruotė"
-            fill
-            className="object-cover"
-            priority
+          <VideoBackground
+            videoFile={hero.videoFile || undefined}
+            videoUrl={hero.videoUrl || undefined}
+            fallbackImage={hero.fallbackImage}
+            title="Dziudo treniruotės"
           />
-          <div className="absolute inset-0 w-full h-full">
-            {hero.videoFile ? (
-              <video
-                className="absolute top-1/2 left-1/2 w-[177.78vh] h-[100vh] -translate-x-1/2 -translate-y-1/2 object-cover"
-                src={hero.videoFile}
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster={hero.fallbackImage}
-              />
-            ) : (
-              <iframe
-                className="absolute top-1/2 left-1/2 w-[177.78vh] h-[100vh] -translate-x-1/2 -translate-y-1/2"
-                src={hero.videoUrl}
-                title="Dziudo treniruotės"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                loading="eager"
-              />
-            )}
-          </div>
           <div className="absolute inset-0 bg-dojo-blue/60" />
         </div>
 
